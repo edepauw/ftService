@@ -38,11 +38,13 @@ spec:
         ports:
         - containerPort: 5000
         livenessProbe:
-          httpGet:
-            path: /
-            port: 5000
-          initialDelaySeconds: 15 #Kubelet qu'il devrait attendre 5 secondes avant d'effectuer la première probe
-          periodSeconds: 5 #Kubelet doit effectuer un check de liveness toutes les 5 secondes
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep php-fpm7'
+          initialDelaySeconds: 10
+          periodSeconds: 5
         env:
         - name: PMA_HOST
           value: mysql

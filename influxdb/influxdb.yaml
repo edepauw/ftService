@@ -44,6 +44,14 @@ spec:
         app: influxdb
     spec:
       containers:
+        livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep influxd'
+          initialDelaySeconds: 10
+          periodSeconds: 5
       - name: influxdb
         image: influxdb-image
         imagePullPolicy: Never

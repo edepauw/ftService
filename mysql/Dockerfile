@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: edepauw <edepauw@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/29 08:57:41 by jdel-ros          #+#    #+#              #
-#    Updated: 2021/04/14 11:17:25 by edepauw          ###   ########lyon.fr    #
+#    Updated: 2021/05/31 09:17:43 by tgrangeo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ ADD srcs/telegraf.conf /etc/telegraf/
 
 #Add conf
 ADD		srcs/setup.sh .
-ADD		srcs/conf.sql .
+ADD		srcs/wordpress.sql .
 RUN		chmod 777 setup.sh
 
 EXPOSE 3306

@@ -43,6 +43,15 @@ spec: #Quel état vous désirez pour l'objet
         app: nginx
     spec:
       containers:
-      - name: nginx
+        - name: nginx
         image: nginx-image
         imagePullPolicy: Never
+      livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep sshd && pgrep nginx'
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      

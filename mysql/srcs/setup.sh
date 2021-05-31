@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    setup.sh                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: edepauw <edepauw@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/29 08:57:45 by jdel-ros          #+#    #+#              #
-#    Updated: 2021/04/14 11:33:16 by edepauw          ###   ########lyon.fr    #
+#    Updated: 2021/05/31 11:36:19 by tgrangeo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
