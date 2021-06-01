@@ -42,7 +42,7 @@ spec:
             command:
             - /bin/ash
             - -c
-            - 'pgrep telegraf && pgrep php-fpm7'
+            - 'pgrep telegraf && pgrep php-fpm7 && pgrep nginx'
           initialDelaySeconds: 10
           periodSeconds: 5
         env:

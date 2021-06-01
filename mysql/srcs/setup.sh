@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    setup.sh                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/01/29 08:57:45 by jdel-ros          #+#    #+#              #
-#    Updated: 2021/05/31 11:36:19 by tgrangeo         ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
-
 #!/bin/sh
 
 telegraf &
@@ -26,10 +14,3 @@ sed -i "s|.*skip-networking.*|#skip-networking|g" /etc/my.cnf.d/mariadb-server.c
 service mariadb start
 mysql -u root -D wordpress < wordpress.sql
 mysqld --user=root
-while true;
-do
-	if ! pgrep mysql >/dev/null 2>&1 ; then
-		exit 1
-	fi
-	sleep 2
-done

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: nginx
+  name: nginx-deployment
+spec: 
+  selector: 
+    matchLabels: 
+      app: nginx
+  strategy: 
+    type: Recreate
+  template: 
+    metadata: 
+      labels: 
+        app: nginx
+    spec: 
+      containers: 
+        - name: nginx
+          image: nginx-image
+          imagePullPolicy: Never
+          livenessProbe: 
+           exec: 
+             command: 
+               - /bin/ash
+               - "-c"
+               - "pgrep telegraf && pgrep nginx"
+           initialDelaySeconds: 10
+           periodSeconds: 5

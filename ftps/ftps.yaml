@@ -15,16 +15,16 @@ spec:
         app: ftps
     spec:
       containers:
+      - name: ftps
+        image: ftps-image
         livenessProbe:
           exec:
             command:
             - /bin/ash
             - -c
-            - 'pgrep telegraf &&  pgrep vsftpd'
+            - 'pgrep telegraf'
           initialDelaySeconds: 10
           periodSeconds: 5
-      - name: ftps
-        image: ftps-image
         imagePullPolicy: Never
         ports:
         - containerPort: 21

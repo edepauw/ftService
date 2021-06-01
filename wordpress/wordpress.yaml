@@ -35,17 +35,16 @@ spec:
         app: wordpress
     spec:
       containers:
-        livenessProbe:
-          exec:
-            command:
-            - /bin/ash
-            - -c
-            - 'pgrep telegraf && pgrep php-fpm7'
-          initialDelaySeconds: 10
-          periodSeconds: 5
       - name: wordpress
         image: wordpress-image
         imagePullPolicy: Never
         ports:
         - containerPort: 5050
-
+        livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep php-fpm7 && pgrep nginx'
+          initialDelaySeconds: 10
+          periodSeconds: 5

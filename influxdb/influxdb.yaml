@@ -25,7 +25,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 500Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,6 +44,8 @@ spec:
         app: influxdb
     spec:
       containers:
+      - name: influxdb
+        image: influxdb-image
         livenessProbe:
           exec:
             command:
@@ -52,8 +54,6 @@ spec:
             - 'pgrep telegraf && pgrep influxd'
           initialDelaySeconds: 10
           periodSeconds: 5
-      - name: influxdb
-        image: influxdb-image
         imagePullPolicy: Never
         ports:
         - containerPort: 8086

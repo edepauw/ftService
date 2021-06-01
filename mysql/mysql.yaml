@@ -26,7 +26,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 500Mi
 
 ---
 apiVersion: apps/v1
@@ -48,17 +48,17 @@ spec:
         app: mysql
     spec:
       containers:
-        livenessProbe:
-          exec:
-            command:
-            - /bin/ash
-            - -c
-            - 'pgrep telegraf && pgrep mysqld_safe'
-          initialDelaySeconds: 10
-          periodSeconds: 5
       - name: mysql
         image: mysql-image
         imagePullPolicy: Never
+        livenessProbe:
+            exec:
+              command:
+              - /bin/ash
+              - -c
+              - 'pgrep telegraf && pgrep mysqld'
+            initialDelaySeconds: 10
+            periodSeconds: 5
         ports:
         - containerPort: 3306
         env:

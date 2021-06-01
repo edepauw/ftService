@@ -1,18 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    setup.sh                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/01/29 08:55:28 by jdel-ros          #+#    #+#              #
-#    Updated: 2021/05/31 14:13:56 by tgrangeo         ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
-
 #!/bin/sh
-minikube delete
-
 
 minikube start --vm-driver=virtualbox --memory=3g 
 eval $(minikube docker-env)
