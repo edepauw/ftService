@@ -49,6 +49,8 @@ spec:
     spec:
       containers:
       - name: mysql
+        command: ["/bin/sh"]               # additional command
+        args: ["-c", "sleep 60"]
         image: mysql-image
         imagePullPolicy: Never
         livenessProbe:

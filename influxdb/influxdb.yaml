@@ -45,6 +45,8 @@ spec:
     spec:
       containers:
       - name: influxdb
+        command: ["/bin/sh"]               # additional command
+        args: ["-c", "sleep 60"]
         image: influxdb-image
         livenessProbe:
           exec:
