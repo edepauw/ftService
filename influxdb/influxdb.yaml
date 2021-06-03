@@ -13,19 +13,19 @@ spec:
     protocol: TCP
     targetPort: 8086
   type: ClusterIP
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: influxdb-pvc
-  labels:
-    app: influxdb
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 500Mi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: influxdb-pvc
+#   labels:
+#     app: influxdb
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,24 +45,21 @@ spec:
     spec:
       containers:
       - name: influxdb
-        command: ["/bin/sh"]               # additional command
-        args: ["-c", "sleep 60"]
         image: influxdb-image
         livenessProbe:
           exec:
             command:
-            - /bin/ash
-            - -c
-            - 'pgrep telegraf && pgrep influxd'
+            - pgrep
+            - 'influxdb'
           initialDelaySeconds: 10
           periodSeconds: 5
         imagePullPolicy: Never
         ports:
         - containerPort: 8086
-        volumeMounts:
-        - name: influxdb-persistent-storage
-          mountPath: /var/lib/influxdb
-      volumes:
-      - name: influxdb-persistent-storage
-        persistentVolumeClaim:
-          claimName: influxdb-pvc
+      #   volumeMounts:
+      #   - name: influxdb-persistent-storage
+      #     mountPath: /var/lib/influxdb
+      # volumes:
+      # - name: influxdb-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: influxdb-pvc

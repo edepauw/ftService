@@ -21,4 +21,4 @@ RUN chmod 777 setup.sh
 
 EXPOSE 8086
 
-CMD		[ "/bin/ash", "setup.sh" ]
+#CMD		[ "/bin/ash", "setup.sh" ]

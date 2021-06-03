@@ -13,20 +13,19 @@ spec:
     protocol: TCP
     targetPort: 3306
   type: ClusterIP
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pv
-  labels:
-    app: mysql
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 500Mi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mysql-pv
+#   labels:
+#     app: mysql
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
 
 ---
 apiVersion: apps/v1
@@ -49,20 +48,17 @@ spec:
     spec:
       containers:
       - name: mysql
-        command: ["/bin/sh"]               # additional command
-        args: ["-c", "sleep 60"]
         image: mysql-image
         imagePullPolicy: Never
         livenessProbe:
             exec:
               command:
-              - /bin/ash
-              - -c
-              - 'pgrep telegraf && pgrep mysqld'
+              - pgrep
+              - 'mysqld'
             initialDelaySeconds: 10
             periodSeconds: 5
         ports:
-        - containerPort: 3306
+          - containerPort: 3306
         env:
         - name: MYSQL_ROOT_USERNAME
           valueFrom:
@@ -74,13 +70,13 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: mysql-root-password
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pv
+      #   volumeMounts:
+      #   - name: mysql-persistent-storage
+      #     mountPath: /var/lib/mysql
+      # volumes:
+      # - name: mysql-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: mysql-pv
 ---
 apiVersion: v1
 kind: Secret

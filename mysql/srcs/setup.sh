@@ -1,6 +1,4 @@
 #!/bin/sh
-
-telegraf &
 /etc/init.d/mariadb setup
 service mariadb start
 
@@ -14,3 +12,4 @@ sed -i "s|.*skip-networking.*|#skip-networking|g" /etc/my.cnf.d/mariadb-server.c
 service mariadb start
 mysql -u root -D wordpress < wordpress.sql
 mysqld --user=root
+telegraf & sleep infinite
