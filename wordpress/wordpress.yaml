@@ -37,9 +37,6 @@ spec:
       containers:
       - name: wordpress
         image: wordpress-image
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 5050
         livenessProbe:
           exec:
             command:
@@ -48,3 +45,6 @@ spec:
             - 'pgrep telegraf && pgrep php-fpm7 && pgrep nginx'
           initialDelaySeconds: 10
           periodSeconds: 5
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5050

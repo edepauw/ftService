@@ -55,7 +55,7 @@ spec:
               command:
               - /bin/ash
               - "-c"
-              - 'pgrep mysqld telegraf'
+              - 'pgrep mysqld'
             initialDelaySeconds: 10
             periodSeconds: 5
         ports:
