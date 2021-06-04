@@ -13,19 +13,19 @@ spec:
     protocol: TCP
     targetPort: 3306
   type: ClusterIP
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: mysql-pv
-#   labels:
-#     app: mysql
-# spec:
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv
+  labels:
+    app: mysql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 
 ---
 apiVersion: apps/v1
@@ -53,8 +53,9 @@ spec:
         livenessProbe:
             exec:
               command:
-              - pgrep
-              - 'mysqld'
+              - /bin/ash
+              - "-c"
+              - 'pgrep mysqld telegraf'
             initialDelaySeconds: 10
             periodSeconds: 5
         ports:
@@ -70,13 +71,13 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: mysql-root-password
-      #   volumeMounts:
-      #   - name: mysql-persistent-storage
-      #     mountPath: /var/lib/mysql
-      # volumes:
-      # - name: mysql-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: mysql-pv
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv
 ---
 apiVersion: v1
 kind: Secret
